@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TS API</title>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap');
+
+        * {
+            font-family: 'Baloo Tamma 2', cursive;
+        }
+
+        h2, p {
+            text-align: center;
+        }
+
+        form {
+            max-width: 20%;
+            margin: auto;
+        }
+
+    </style>
+
+    <h2>Taylor Swift API - Álbuns</h2>
+    <hr/>
+    <p>Busque as músicas de algum álbum da Taylor! :D</p>
+    <form action="/buscar" method="POST">
+        <input type="text" name="album" id="album">
+        <button type="submit">Buscar</button>
+        <br>
+    </form>
+</body>
+</html>

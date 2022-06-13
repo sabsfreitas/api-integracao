@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TS API</title>
+</head>
+<body>
+    <style>
+
+       @import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap');
+
+        * {
+            font-family: 'Baloo Tamma 2', cursive;
+        }
+        li {
+            list-style-type: none;
+        }
+
+        .content {
+            max-width: 25%;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+        
+    </style>
+
+    <h1> ❥ <%= albumPesquisado %> </h1>
+    <div class="content">
+        <% Object.entries(groupBySong).forEach(([key, value]) => {  %>
+            <h2> ♪ <%= key %> </h2>
+
+        <% for(let i = 0; i < value.length; i++) {  %>
+              <li> ❝ <%= value[i].quote;  %> ❞ </li> 
+         <%  } %>
+  <%  }); %>
+   </div>
+   <br>
+</body>
+</html>
