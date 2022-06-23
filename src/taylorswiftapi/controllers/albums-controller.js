@@ -9,7 +9,7 @@ class AlbumController {
 
     const groupBySong = musicas.reduce((group, musica) => {
         const { song } = musica;
-        group[song] = group[song] ?? [];
+        group[song] = group[song] || [];
         group[song].push(musica);
         return group;
       }, {});
