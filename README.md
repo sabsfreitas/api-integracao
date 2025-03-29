@@ -12,7 +12,8 @@ Um projeto que busca e exibe informações sobre os álbuns de Taylor Swift util
 
 ### 🎤 **Exibição do álbum e suas músicas**  
 - Exibição do nome do álbum encontrado.  
-- Listagem de todas as músicas do álbum.  
+- Listagem de todas as músicas do álbum.
+- Novo: Letra da música. 
 
 ---
 
