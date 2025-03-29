@@ -6,5 +6,6 @@ const albumController = new AlbumController();
 const routes = Router();
 
 routes.post('/buscar', albumController.buscaAlbum);
+routes.get('/lyrics/:songId', albumController.buscaLetra);
 
 module.exports = routes;

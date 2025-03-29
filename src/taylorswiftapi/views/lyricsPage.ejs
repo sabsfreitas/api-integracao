@@ -15,10 +15,6 @@
             font-family: 'Baloo Tamma 2', cursive;
         }
 
-        li {
-            list-style-type: none;
-        }
-
         .content {
             max-width: 25%;
             margin: auto;
@@ -27,26 +23,26 @@
         h1 {
             text-align: center;
         }
+
+        a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 20px;
+        }
         
     </style>
+
+
+<h1><%= songTitle %></h1>
 
 <% if (erro) { %>
     <p style="color: red;"><%= erro %></p>
 <% } else { %>
-    <h1> ❥ <%= albumPesquisado %> </h1>
-    <div class="content">
-        <% if (musicas.length > 0) { %>
-            <ul>
-                <% musicas.forEach(musica => { %>
-                    <li>
-                        <a href="/lyrics/<%= musica.id %>"><strong>♪ <%= musica.title %></strong>
-                    </li>
-                <% }); %>
-            </ul>
-        <% } else { %> 
-            <p>Nenhuma música encontrada para esse álbum. :[</p>
-        <% } %>
-    </div>
+    <pre class="content"><%= lyrics %></pre>
 <% } %>
+
+<a href="/">Voltar</a>
 </body>
 </html>

@@ -19,7 +19,7 @@ class AlbumController {
                 });
             }
     
-            const musicas = await buscaMusicasDoAlbum(albumEncontrado.id);
+            const musicas = await buscaMusicas(albumEncontrado.id);
     
             if (musicas.length === 0) {
                 return res.render("albumAll", { 
@@ -41,7 +41,40 @@ class AlbumController {
                 erro: "Erro interno no servidor."
             });
         }
-    }    
+    }
+    async buscaLetra(req, res) {
+        try {
+            const { songId } = req.params;
+    
+            if (!songId) {
+                return res.status(400).send("ID da música não fornecido.");
+            }
+    
+            const letraData = await buscaLyrics(songId);
+    
+            if (!letraData || !letraData.lyrics) {
+                return res.render("lyricsPage", { 
+                    erro: "Letra não encontrada.", 
+                    lyrics: null,
+                    songTitle: null
+                });
+            }
+    
+            return res.render("lyricsPage", { 
+                lyrics: letraData.lyrics, 
+                songTitle: letraData.song_title,
+                erro: null 
+            });
+    
+        } catch (error) {
+            console.error("Erro ao buscar letra:", error);
+            res.render("lyricsPage", { 
+                erro: "Erro interno no servidor.", 
+                lyrics: null,
+                songTitle: null
+            });
+        }
+    }      
 }
 
 const buscaAlbumID = async (titulo) => {
@@ -69,19 +102,35 @@ const buscaAlbumID = async (titulo) => {
     }
 };
 
-const buscaMusicasDoAlbum = async (albumId) => {
+const buscaMusicas = async (albumId) => {
     const URL = `https://taylor-swift-api.sarbo.workers.dev/albums/${albumId}`;
 
     try {
         const resposta = await axios.get(URL);
-        return Array.isArray(resposta.data) ? resposta.data : [];
+        const musicas = resposta.data;
+
+        return Array.isArray(musicas) ? musicas.map(musica => ({
+            id: musica.song_id, 
+            title: musica.title
+        })) : [];
     } catch (error) {
         console.error("Erro ao buscar músicas:", error);
         return [];
     }
 };
 
+const buscaLyrics = async (songId) => {
+    const URL = `https://taylor-swift-api.sarbo.workers.dev/lyrics/${songId}`;
 
+    try {
+        const resposta = await axios.get(URL);
+        const letra = resposta.data;
 
+        return letra ? { song_title: letra.song_title, lyrics: letra.lyrics } : null;
+    } catch (error) {
+        console.error("Erro ao buscar letra:", error);
+        return null;
+    }
+};
 
-module.exports = { AlbumController, buscaAlbumID, buscaMusicasDoAlbum };
+module.exports = { AlbumController, buscaAlbumID, buscaMusicas, buscaLyrics };
